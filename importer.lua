@@ -22,4 +22,19 @@ if (callingArguments[1] == "-s") then-- -s for select
             end
         end
     end
+else
+    for i, v in pairs(names) do
+        local success = pcall(function()
+            shell.run("wget", "https://raw.githubusercontent.com/BHNowaru/ccirc/main/" .. v .. ".lua", v..".lua")
+        end)
+        if (not success) then
+            term.setTextColour(term.isColour and colours.lime or colours.white);
+            print("Could not install", tostring(v)..".lua.")
+            term.setTextColour(colours.white);
+        else
+            term.setTextColour(term.isColour and colours.red or colours.lightGray);
+            print("Successfully installed")
+            term.setTextColour(colours.white);
+        end
+    end
 end
