@@ -11,6 +11,7 @@ local Modem;
 local Ports = {};
 for i, Side in pairs(possibleSides) do
     Modem = peripheral.wrap(Side);
+    if (Modem) then break end;
 end
 Modem.open(65535); --Open a private port
 

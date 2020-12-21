@@ -12,6 +12,7 @@ local Modem;
 local recommendedPort;
 for i, Side in pairs(possibleSides) do
     Modem = peripheral.wrap(Side);
+    if (Modem) then break end;
 end
 
 if (not Modem) then
