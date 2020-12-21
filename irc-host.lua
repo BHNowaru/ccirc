@@ -14,13 +14,14 @@ for i, Side in pairs(possibleSides) do
     if (Modem) then break end;
 end
 Modem.open(65535); --Open a private port
-
+print("gamer 2")
 --Handler for determining if a port is open
 coroutine.wrap(function()
     while (true) do
         local pingWait, senderPort, replyPort, returnedData = os.pullEvent("modem_message");
         replyPort = tonumber(replyPort);
         senderPort = tonumber(senderPort);
+        print("gamer")
         local success, err = pcall(function()
             if (type(returnedData) ~= "table") then
                 if (replyPort and replyPort < 65535 ) then
