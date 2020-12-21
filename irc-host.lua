@@ -16,7 +16,7 @@ end
 Modem.open(65535); --Open a private port
 print("gamer 2")
 --Handler for determining if a port is open
-coroutine.wrap(function()
+--coroutine.wrap(function()
     while (true) do
         local pingWait, senderPort, replyPort, returnedData = os.pullEvent("modem_message");
         replyPort = tonumber(replyPort);
@@ -57,4 +57,4 @@ coroutine.wrap(function()
             })
         end
     end
-end)();
+--end)();
