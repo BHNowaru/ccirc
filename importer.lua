@@ -8,9 +8,7 @@ if (callingArguments[1] == "-s") then-- -s for select
     callingArguments = {table.unpack(callingArguments, 2)}
     for i, v in pairs(callingArguments) do
         if (table.find(names, tostring(i):lower())) then
-            local success = pcall(function()
-                shell.run("wget", "https://raw.githubusercontent.com/BHNowaru/ccirc/main/" .. i .. ".lua", i..".lua")
-            end)
+            local success = shell.run("wget", "https://raw.githubusercontent.com/BHNowaru/ccirc/main/" .. i .. ".lua", i..".lua")
             if (not success) then
                 term.setTextColour(term.isColour and colours.lime or colours.white);
                 print("Could not install", tostring(i)..".lua.")
@@ -24,9 +22,7 @@ if (callingArguments[1] == "-s") then-- -s for select
     end
 else
     for i, v in pairs(names) do
-        local success = pcall(function()
-            shell.run("wget", "https://raw.githubusercontent.com/BHNowaru/ccirc/main/" .. i .. ".lua", i ..".lua")
-        end)
+        local success = shell.run("wget", "https://raw.githubusercontent.com/BHNowaru/ccirc/main/" .. i .. ".lua", i ..".lua")
         if (not success) then
             term.setTextColour(term.isColour and colours.lime or colours.white);
             print("Could not install", tostring(i)..".lua.")
