@@ -21,17 +21,20 @@ print("gamer 2")
         local pingWait, senderPort, replyPort, returnedData = os.pullEvent("modem_message");
         replyPort = tonumber(replyPort);
         senderPort = tonumber(senderPort);
-        print("gamer2")
+        print("gamer")
         local success, err = pcall(function()
             if (type(returnedData) ~= "table") then
                 if (replyPort and replyPort < 65535 ) then
+                    print("Not packet");
                     Modem.transmit(replyPort or senderPort, replyPort or senderPort, {
                         code = "400";
                         message = "irc-host: Data that was sent was not a packet.";
                     })
                 end
             else
+                print"Ports?"
                 if (returnedData.type == "open_ports") then
+                    print("Is ports.")
                     assert(returnedData.discriminator);
                     local openPorts = {};
                     for i = 1, 65534 do
@@ -39,6 +42,7 @@ print("gamer 2")
                             openPorts[#openPorts+1] = i;
                         end
                     end
+                    print("Transmitted.")
                     Modem.transmit(replyPort, 65535, {
                         code = "200";
                         response = {
@@ -50,6 +54,8 @@ print("gamer 2")
             end
         end)
         if (not success) then
+            print("bad");
+            print("error");
             Modem.transmit(replyPort or senderPort, replyPort or senderPort, {
                 code = "400";
                 discriminator = (returnedData or {}).discriminator;
