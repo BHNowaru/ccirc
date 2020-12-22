@@ -21,7 +21,7 @@ print("gamer 2")
         local pingWait, senderPort, replyPort, returnedData = os.pullEvent("modem_message");
         replyPort = tonumber(replyPort);
         senderPort = tonumber(senderPort);
-        print("gamer")
+        print("gamer2")
         local success, err = pcall(function()
             if (type(returnedData) ~= "table") then
                 if (replyPort and replyPort < 65535 ) then
