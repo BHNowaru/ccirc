@@ -1,4 +1,5 @@
 local callingArguments = {...};
+local Path = shell.dir().."/";
 local names = {
     ["irc-client"] = true,
     ["irc-host"] = true,
@@ -8,8 +9,8 @@ if (callingArguments[1] == "-s") then-- -s for select
     callingArguments = {table.unpack(callingArguments, 2)}
     for i, v in pairs(callingArguments) do
         if (names[i:lower()]) then
-            if (fs.exists("./"..i..".lua")) then
-                fs.delete("./"..i..".lua");
+            if (fs.exists(Path..i..".lua")) then
+                fs.delete(Path..i..".lua");
             end
             local success = shell.run("wget", "https://raw.githubusercontent.com/BHNowaru/ccirc/main/" .. i .. ".lua", i..".lua")
             if (not success) then
@@ -25,8 +26,8 @@ if (callingArguments[1] == "-s") then-- -s for select
     end
 else
     for i, v in pairs(names) do
-        if (fs.exists("./"..i..".lua")) then
-            fs.delete("./"..i..".lua");
+        if (fs.exists(Path..i..".lua")) then
+            fs.delete(Path..i..".lua");
         end
         local success = shell.run("wget", "https://raw.githubusercontent.com/BHNowaru/ccirc/main/" .. i .. ".lua", i..".lua")
         if (not success) then
