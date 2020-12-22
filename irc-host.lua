@@ -21,7 +21,8 @@ print("gamer 2")
         local pingWait, senderPort, replyPort, returnedData = os.pullEvent("modem_message");
         replyPort = tonumber(replyPort);
         senderPort = tonumber(senderPort);
-        print("gamer")
+        print("e:")
+        print(returnedData)
         local success, err = pcall(function()
             if (type(returnedData) ~= "table") then
                 print(returnedData);
