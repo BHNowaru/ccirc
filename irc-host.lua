@@ -18,7 +18,7 @@ print("gamer 2")
 --Handler for determining if a port is open
 --coroutine.wrap(function()
     while (true) do
-        local pingWait, senderPort, replyPort, returnedData = os.pullEvent("modem_message");
+        local pingWait, side, senderPort, replyPort, returnedData = os.pullEvent("modem_message");
         replyPort = tonumber(replyPort);
         senderPort = tonumber(senderPort);
         print("e:")

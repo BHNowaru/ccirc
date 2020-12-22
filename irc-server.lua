@@ -37,7 +37,7 @@ Modem.transmit(65535, 65535, {
 local openPorts = {};
 while (true) do
     --eventName, senderPort, replyPort, returnedData
-    local Event, senderPort, replyPort, portData = os.pullEvent("modem_message");
+    local Event, side,  senderPort, replyPort, portData = os.pullEvent("modem_message");
     if (portData.discriminator == discriminator) then
         print(portData);
     else
