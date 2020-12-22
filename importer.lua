@@ -1,5 +1,6 @@
 local callingArguments = {...};
 local Path = shell.dir().."/";
+--wget run https://raw.githubusercontent.com/BHNowaru/ccirc/main/importer.lua
 local names = {
     ["irc-client"] = true,
     ["irc-host"] = true,
@@ -10,6 +11,7 @@ if (callingArguments[1] == "-s") then-- -s for select
     for i, v in pairs(callingArguments) do
         if (names[i:lower()]) then
             if (fs.exists(Path..i..".lua")) then
+                print'wa'
                 fs.delete(Path..i..".lua");
             end
             local success = shell.run("wget", "https://raw.githubusercontent.com/BHNowaru/ccirc/main/" .. i .. ".lua", i..".lua")
@@ -27,6 +29,7 @@ if (callingArguments[1] == "-s") then-- -s for select
 else
     for i, v in pairs(names) do
         if (fs.exists(Path..i..".lua")) then
+            print'wa'
             fs.delete(Path..i..".lua");
         end
         local success = shell.run("wget", "https://raw.githubusercontent.com/BHNowaru/ccirc/main/" .. i .. ".lua", i..".lua")
