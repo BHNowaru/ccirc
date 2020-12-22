@@ -24,7 +24,7 @@ print("gamer 2")
         print("gamer")
         local success, err = pcall(function()
             if (type(returnedData) ~= "table") then
-                print("uh?");
+                print(returnedData);
                 if (replyPort and replyPort < 65535 ) then
                     print("Not packet");
                     Modem.transmit(replyPort or senderPort, replyPort or senderPort, {
