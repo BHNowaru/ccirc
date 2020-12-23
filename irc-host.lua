@@ -114,7 +114,7 @@ while (true) do
                 message = "irc-host: Bad request.";
             }
         })
-        term.setTextColor(term.isColour and colours.red or colours.lightGray)
+        term.setTextColor(term.isColour and colours.red or colours.lightGrey)
         print(err);
         term.setTextColor(colours.white);
     end

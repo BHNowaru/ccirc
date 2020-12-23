@@ -54,7 +54,7 @@ local isColour = term.isColour();
 if (isColour) then
     term.setTextColor(colours.lime);
 else
-    term.setTextColor(colours.lightGray);
+    term.setTextColor(colours.lightGrey);
 end
 print("Success! Connected to the server.");
 term.setTextColour(colours.white)

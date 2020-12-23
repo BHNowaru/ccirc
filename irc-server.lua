@@ -195,7 +195,7 @@ function handler()
                     ID = tostring(ID[1]..ID[2]..ID[3]..ID[4]);
                 until not searchForUserTag(Username.."#"..ID)
                 local BWColours = {
-                    colours.lightGray;
+                    colours.lightGrey;
                     colours.white;
                     colours.grey;
                     colors.white;
