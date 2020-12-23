@@ -154,22 +154,19 @@ function handler()
 
                 ]]--
                 print("Getting ready to send...")
-                for i, User in pairs(connectedUsers) do
-                    print("Broadcasting to user ", User.tag.."...");
-                    Modem.transmit(replyPort or senderPort, replyPort or senderPort, {
-                        type = "message";
-                        response = {
+                Modem.transmit(replyPort or senderPort, replyPort or senderPort, {
+                    type = "message";
+                    response = {
 
-                            user = {
-                                username = sendingUser.username;
-                                tag = sendingUser.tag;
-                                discriminator = portData.discriminator;
-                                color = sendingUser.color or sendingUser.bwcolor
-                            };
-                            message = portData.request.message;
-                        }
-                    })
-                end
+                        user = {
+                            username = sendingUser.username;
+                            tag = sendingUser.tag;
+                            discriminator = portData.discriminator;
+                            color = sendingUser.color or sendingUser.bwcolor
+                        };
+                        message = portData.request.message;
+                    }
+                })
             elseif (portData.type == "connect") then
                 --expected data for connect:
                 --[[
@@ -262,5 +259,50 @@ function handler()
         end
     end
 end;
-
-parallel.waitForAll(handler)
+function ping()
+    while true do
+        sleep(3)
+        for i, v in pairs(connectedUsers) do
+            sleep(0.25)
+            local Discrim = tonumber(i);
+            print("Discrim:", Discrim)
+            local pong = false;
+            parallel.waitForAny(
+                function()
+                    --timeout
+                    sleep(5)
+                    if (not pong) then
+                        --Try to broadcast to them that they should leave
+                        --Remove their trace from connectedUsers
+                        Modem.transmit(port, port, {
+                            type = "disconnect";
+                            response = {
+                                reason = "Did not send ping back.";
+                                discriminator = Discrim;
+                            }
+                        })
+                    end
+                    return true
+                end,
+                function()
+                    print("Pinging", v.tag)
+                    Modem.transmit(port, port, {
+                        type = "active";
+                        response = {
+                            discriminator = Discrim;
+                        }
+                    })
+                    while true do
+                        local Event, Side, senderPort, replyPort, portData, _ = os.pullEvent("modem_message");
+                        if (portData.type == "imalive" and portData.response.discriminator == Discrim) then
+                            pong = true
+                            print(v.tag, "has ponged!")
+                            return true;
+                        end
+                    end
+                end
+            )
+        end
+    end
+end
+parallel.waitForAll(handler, ping)
