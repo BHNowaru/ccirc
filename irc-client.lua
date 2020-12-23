@@ -48,7 +48,7 @@ while true do
         break;
     end
 end
-Modem.close(66535);
+Modem.close(65535);
 Modem.open(Port);
 local isColour = term.isColour();
 if (isColour) then
