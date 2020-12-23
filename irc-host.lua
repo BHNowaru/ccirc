@@ -1,19 +1,22 @@
 --Derive modem
 local possibleSides = {
-    "up";
-    "top";
-    "left";
-    "right";
-    "down";
-    "front";
-    "back";
+    "front",
+    "back",
+    "left",
+    "right",
+    "top",
+    "bottom"
 }
+
 local Modem;
 local Ports = {};
 for i, Side in pairs(possibleSides) do
-    Modem = peripheral.wrap(Side);
-    if (Modem) then break end;
+    if (peripheral.getType(Side) == "modem") then
+        Modem = peripheral.wrap(Side);
+        if (Modem) then break end;
+    end
 end
+
 if (not Modem) then error("Modem not found.") end;
 Modem.open(65535); --Open a private port
 --Handler for determining if a port is open

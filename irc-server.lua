@@ -1,21 +1,21 @@
 
 --Determine which side the modem is on
 local possibleSides = {
-    "up";
-    "top";
-    "left";
-    "right";
-    "down";
-    "front";
-    "back";
+    "front",
+    "back",
+    "left",
+    "right",
+    "top",
+    "bottom"
 }
 local Modem;
 local recommendedPort;
 for i, Side in pairs(possibleSides) do
-    Modem = peripheral.wrap(Side);
-    if (Modem) then break end;
+    if (peripheral.getType(Side) == "modem") then
+        Modem = peripheral.wrap(Side);
+        if (Modem) then break end;
+    end
 end
-
 if (not Modem) then
     error("Modem is not installed. Please install one. An ender modem is most preferred.");
 end
